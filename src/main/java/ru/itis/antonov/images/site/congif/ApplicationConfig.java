@@ -30,7 +30,7 @@ public class ApplicationConfig implements WebMvcConfigurer {
     @Bean
     public FreeMarkerConfigurer freemarkerConfig() {
         FreeMarkerConfigurer configurer = new FreeMarkerConfigurer();
-        configurer.setTemplateLoaderPath("/WEB_INF/ftl/");
+        configurer.setTemplateLoaderPath("classpath:/res/ftl/");
         return configurer;
     }
 

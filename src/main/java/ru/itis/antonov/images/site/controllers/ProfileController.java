@@ -4,10 +4,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
-@Controller("/profile")
+@Controller
 public class ProfileController {
 
-    @GetMapping("/{profileId}")
+    @GetMapping(path = "profile/{profileId}")
     public String getView(@PathVariable String profileId){
         //TODO
         return "profile";

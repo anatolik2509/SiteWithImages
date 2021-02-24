@@ -9,7 +9,7 @@ import ru.itis.antonov.images.site.services.SignInService;
 
 import javax.validation.Valid;
 
-@Controller("/signIn")
+@Controller
 public class SignInController {
 
     private SignInService signInService;
@@ -19,12 +19,14 @@ public class SignInController {
         this.signInService = signInService;
     }
 
-    @GetMapping
+    @GetMapping(path = "/signIn")
+
     public String getView(){
         return "signIn";
     }
 
-    @PostMapping
+    @PostMapping(path = "/signIn")
+
     public String login(@Valid SignInForm form){
         return "profile";
     }
