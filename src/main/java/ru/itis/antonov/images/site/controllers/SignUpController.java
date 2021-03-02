@@ -6,11 +6,13 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import ru.itis.antonov.images.site.dto.forms.SignInForm;
 import ru.itis.antonov.images.site.dto.forms.SignUpForm;
 import ru.itis.antonov.images.site.services.SignUpService;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.List;
@@ -26,8 +28,14 @@ public class SignUpController {
     }
 
     @GetMapping(path = "/signUp")
-    public String getView(){
+    public String getView(Model model){
+        model.addAttribute("signUpForm", new SignUpForm());
         return "signUp";
+    }
+
+    @ModelAttribute
+    public void addAttributes(Model model, HttpServletRequest request){
+        //model.addAttribute("contextPath", request.getContextPath());
     }
 
     @PostMapping(path = "/signUp")
@@ -42,6 +50,7 @@ public class SignUpController {
             model.addAttribute("signUpForm", form);
             return "signUp";
         }
+        signUpService.register(form);
         return "redirect:/profile";
     }
 }

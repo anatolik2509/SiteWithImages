@@ -16,11 +16,11 @@ public @interface EqualsPasswords {
     String password();
     String passwordRepeat();
 
-//    @Target({ElementType.TYPE})
-//    @Retention(RetentionPolicy.RUNTIME)
-//    @interface List {
-//        EqualsPasswords[] value();
-//    }
+    @Target({ElementType.TYPE})
+    @Retention(RetentionPolicy.RUNTIME)
+    @interface List {
+        EqualsPasswords[] value();
+    }
 
 
     Class<?>[] groups() default {};

@@ -1,13 +1,16 @@
 <html>
+<#import "spring.ftl" as spring/>
 <head>
-    <title>Sign Up</title>
+    <title><@spring.message 'sign_up.title'/></title>
 </head>
 <body>
+${springMacroRequestContext.contextPath}
+<@spring.bind "signUpForm"/>
 <form action="/site/signUp" method="post">
-    <input name="nickName" placeholder="name">
-    <input name="email" type="email" placeholder="email">
-    <input name="password" type="password" placeholder="password">
-    <input name="passwordRepeat" type="password" placeholder="repeat password">
+    <@spring.formInput "signUpForm.nickName" "placeholder="/>
+    <@spring.formInput "signUpForm.email"/>
+    <@spring.formPasswordInput "signUpForm.password"/>
+    <@spring.formPasswordInput "signUpForm.passwordRepeat"/>
     <#if errorList??>
         <p>
             <#list errorList as error>
@@ -17,5 +20,7 @@
     </#if>
     <input type="submit" placeholder="sign up">
 </form>
+<a href="?lang=ru">ru</a>
+<a href="?lang=en">en</a>
 </body>
 </html>

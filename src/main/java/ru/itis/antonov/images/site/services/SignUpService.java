@@ -7,4 +7,8 @@ import ru.itis.antonov.images.site.models.User;
 @Service
 public interface SignUpService {
     User register(SignUpForm form);
+
+    boolean confirmEmail(String UUID);
+
+    void sendEmailToConfirm(User user);
 }

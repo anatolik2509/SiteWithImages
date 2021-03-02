@@ -12,7 +12,8 @@ import javax.persistence.*;
 @NoArgsConstructor
 @Builder
 @Entity
-@Table(name = "account")
+@Table(name = "account",
+        uniqueConstraints = @UniqueConstraint(name = "unique_email_constraint", columnNames = {"email"}))
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
