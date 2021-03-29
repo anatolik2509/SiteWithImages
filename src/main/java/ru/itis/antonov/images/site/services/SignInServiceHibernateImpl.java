@@ -9,6 +9,9 @@ import ru.itis.antonov.images.site.repositories.UserRepository;
 @Service
 public class SignInServiceHibernateImpl implements SignInService {
 
+
+
+
     private UserRepository userRepository;
 
     @Autowired

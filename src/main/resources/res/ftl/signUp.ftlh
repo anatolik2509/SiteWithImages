@@ -6,7 +6,7 @@
 <body>
 ${springMacroRequestContext.contextPath}
 <@spring.bind "signUpForm"/>
-<form action="/site/signUp" method="post">
+<form action="${springMacroRequestContext.contextPath}/signUp" method="post">
     <@spring.formInput "signUpForm.nickName" "placeholder="/>
     <@spring.formInput "signUpForm.email"/>
     <@spring.formPasswordInput "signUpForm.password"/>

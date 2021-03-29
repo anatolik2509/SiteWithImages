@@ -1,4 +1,4 @@
-package ru.itis.antonov.images.site.congif;
+package ru.itis.antonov.images.site.config;
 
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
@@ -35,7 +35,6 @@ public class DataBaseConfig {
     public DataSource dataSource() {
         return new HikariDataSource(hikariConfig());
     }
-
 
     @Bean
     public HikariConfig hikariConfig() {

@@ -1,4 +1,4 @@
-package ru.itis.antonov.images.site.congif;
+package ru.itis.antonov.images.site.config;
 
 import lombok.SneakyThrows;
 import org.springframework.core.env.PropertySource;
@@ -22,8 +22,10 @@ public class ApplicationInitializer implements WebApplicationInitializer {
         PropertySource propertySource = new ResourcePropertySource("classpath:application.properties");
         springWebContext.getEnvironment().setActiveProfiles((String) propertySource.getProperty("spring.profile"));
 
-        springWebContext.register(ApplicationConfig.class);
+        springWebContext.register(ApplicationConfig.class, DataBaseConfig.class, EmailConfiguration.class, LocalizationConfig.class, SecurityConfig.class);
         servletContext.addListener(new ContextLoaderListener(springWebContext));
+
+
 
         ServletRegistration.Dynamic dispatcherServlet =
                 servletContext.addServlet("dispatcher", new DispatcherServlet(springWebContext));
@@ -36,6 +38,7 @@ public class ApplicationInitializer implements WebApplicationInitializer {
         FilterRegistration.Dynamic filterRegistration = servletContext
                 .addFilter("characterEncodingFilter", characterEncodingFilter);
         filterRegistration.addMappingForUrlPatterns(null, false, "/*");
+
     }
 
 }

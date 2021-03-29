@@ -1,5 +1,6 @@
-package ru.itis.antonov.images.site.congif;
+package ru.itis.antonov.images.site.config;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -13,10 +14,12 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.i18n.CookieLocaleResolver;
 import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
 
+import javax.sql.DataSource;
 import java.util.Locale;
 
 @Configuration
 public class LocalizationConfig implements WebMvcConfigurer {
+
     @Override
     public MessageCodesResolver getMessageCodesResolver() {
         DefaultMessageCodesResolver codesResolver = new DefaultMessageCodesResolver();
@@ -42,7 +45,7 @@ public class LocalizationConfig implements WebMvcConfigurer {
         cookieLocaleResolver.setCookieName("localeInfo");
         cookieLocaleResolver.setCookieMaxAge(60 * 60 * 24 * 365);
         cookieLocaleResolver.setDefaultLocale(Locale.ENGLISH);
-        return new IpLocaleResolver();
+        return cookieLocaleResolver;
     }
 
     @Bean
