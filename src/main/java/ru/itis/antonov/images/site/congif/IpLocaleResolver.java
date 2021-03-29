@@ -1,5 +1,7 @@
 package ru.itis.antonov.images.site.congif;
 
+import com.wealoha.ipgeolocation.IpCountryHelper;
+import com.wealoha.ipgeolocation.RequestIpHelper;
 import org.springframework.context.i18n.LocaleContext;
 import org.springframework.web.servlet.LocaleContextResolver;
 import org.springframework.web.servlet.LocaleResolver;
@@ -17,6 +19,7 @@ public class IpLocaleResolver implements LocaleResolver {
 
     @Override
     public Locale resolveLocale(HttpServletRequest httpServletRequest) {
+        System.out.println(IpCountryHelper.getCountry("178.213.247.153"));
         if(httpServletRequest.getCookies() != null) {
             for (Cookie c : httpServletRequest.getCookies()) {
                 if (c.getName().equals(cookieName)) {
@@ -24,7 +27,11 @@ public class IpLocaleResolver implements LocaleResolver {
                 }
             }
         }
-        String lang = httpServletRequest.getHeader("Accept-Language");
+        Long ip = RequestIpHelper.getRequestIP(httpServletRequest);
+        if(ip == null){
+            return def;
+        }
+        String lang = IpCountryHelper.getCountry(ip);
         System.out.println(lang);
         System.out.println(Locale.forLanguageTag(lang));
         if(Locale.forLanguageTag(lang) == null){

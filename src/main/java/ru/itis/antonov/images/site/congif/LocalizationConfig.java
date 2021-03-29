@@ -42,7 +42,7 @@ public class LocalizationConfig implements WebMvcConfigurer {
         cookieLocaleResolver.setCookieName("localeInfo");
         cookieLocaleResolver.setCookieMaxAge(60 * 60 * 24 * 365);
         cookieLocaleResolver.setDefaultLocale(Locale.ENGLISH);
-        return cookieLocaleResolver;
+        return new IpLocaleResolver();
     }
 
     @Bean

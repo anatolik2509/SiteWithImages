@@ -125,6 +125,12 @@
             <version>5.2.9.RELEASE</version>
         </dependency>
 
+        <!-- https://mvnrepository.com/artifact/com.wealoha/ip-geolocation -->
+        <dependency>
+            <groupId>com.wealoha</groupId>
+            <artifactId>ip-geolocation</artifactId>
+            <version>1.0.0</version>
+        </dependency>
 
 
     </dependencies>
