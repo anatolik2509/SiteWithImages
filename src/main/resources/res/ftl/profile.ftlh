@@ -1,0 +1,9 @@
+<html>
+<head>
+    <title>Profile</title>
+</head>
+<body>
+    ${user.userName}
+    ${user.email}
+</body>
+</html>

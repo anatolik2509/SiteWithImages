@@ -2,7 +2,6 @@ package ru.itis.antonov.images.site.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import ru.itis.antonov.images.site.dto.forms.SignUpForm;
 import ru.itis.antonov.images.site.exceptions.OccupiedEmailException;
@@ -13,6 +12,7 @@ import ru.itis.antonov.images.site.utils.MailsGenerator;
 
 import java.util.Optional;
 import java.util.UUID;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 @Service
 public class SignUpServiceHibernateImpl implements SignUpService {
@@ -50,7 +50,7 @@ public class SignUpServiceHibernateImpl implements SignUpService {
                 .confirmCode(UUID.randomUUID().toString())
                 .password(form.getPassword())
                 .build();
-        //userRepository.save(user);
+        userRepository.save(user);
         sendEmailToConfirm(user);
         return user;
     }
@@ -58,7 +58,15 @@ public class SignUpServiceHibernateImpl implements SignUpService {
     @Override
     public boolean confirmEmail(String UUID) {
         Optional<User> user = userRepository.findByConfirmCode(UUID);
-        return user.isPresent();
+        AtomicBoolean result = new AtomicBoolean(false);
+        user.ifPresent((u)->{
+            if(u.getConfirmCode().equals(UUID)){
+                u.setState(User.State.CONFIRMED);
+                userRepository.save(u);
+                result.set(true);
+            }
+        });
+        return result.get();
     }
 
     @Override

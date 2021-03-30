@@ -21,14 +21,22 @@ public class User {
     private String userName;
     private String email;
     private String password;
+    private boolean isBanned = false;
 
 
     @Enumerated(value = EnumType.STRING)
-    private State state;
+    private State state = State.NON_CONFIRMED;
+
+    @Enumerated(value = EnumType.STRING)
+    private Role role = Role.USER;
 
     private String confirmCode;
 
     public enum State{
         CONFIRMED, NON_CONFIRMED
+    }
+
+    public enum Role{
+        USER, ADMIN;
     }
 }
